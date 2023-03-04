@@ -17,16 +17,17 @@ def create_app():
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+        db = SQLAlchemy(app)
+        Session(app)
 
-    return app
+    return app, db
 
 
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-app = create_app()
+app, db = create_app()
 
-db = SQLAlchemy(app)
-Session(app)
+
 
 class user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
