@@ -12,3 +12,4 @@ websocket-client==1.5.1
 Werkzeug==2.2.3
 y-py==0.5.5
 ypy-websocket==0.8.2
+gunicorn==20.1.0
