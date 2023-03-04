@@ -26,7 +26,7 @@ def create_app():
 app = create_app()
 
 db = SQLAlchemy(app)
-        Session(app)
+Session(app)
 
 class user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
