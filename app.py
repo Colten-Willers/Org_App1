@@ -3,23 +3,29 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from other_functions import login_required
 
-app = Flask(__name__)
 
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+def create_app():
+    app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'ultra_secret_key'
+    with app.app_context():
+        app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-app.config['SESSION_TYPE'] = 'filesystem'
+        app.config['SECRET_KEY'] = 'ultra_secret_key'
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        app.config['SESSION_TYPE'] = 'filesystem'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+        db = SQLAlchemy(app)
+        Session(app)
+
+    return app
+
 
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
-
-Session(app)
+app = create_app()
 
 class user(db.Model):
     id = db.Column(db.Integer, primary_key=True)
