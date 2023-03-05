@@ -19,7 +19,7 @@ def create_app():
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
         db = SQLAlchemy(app)
         
-        class user(db.Model):
+        global class user(db.Model):
             id = db.Column(db.Integer, primary_key=True)
             user_name = db.Column(db.String(20), nullable=False)
             user_password = db.Column(db.String(20), nullable=False)
@@ -28,7 +28,7 @@ def create_app():
             def __repr__(self):
                 return f'User: {self.user_name}'
 
-        class prak(db.Model):
+        global class prak(db.Model):
             id = db.Column(db.Integer, primary_key=True)
             participant = db.Column(db.String(20), nullable=False)
             rating = db.Column(db.Integer, nullable=False)
