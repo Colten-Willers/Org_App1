@@ -19,24 +19,7 @@ def create_app():
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
         db = SQLAlchemy(app)
         
-        global class user(db.Model):
-            id = db.Column(db.Integer, primary_key=True)
-            user_name = db.Column(db.String(20), nullable=False)
-            user_password = db.Column(db.String(20), nullable=False)
-            user_email = db.Column(db.String(20), nullable=False)
-
-            def __repr__(self):
-                return f'User: {self.user_name}'
-
-        global class prak(db.Model):
-            id = db.Column(db.Integer, primary_key=True)
-            participant = db.Column(db.String(20), nullable=False)
-            rating = db.Column(db.Integer, nullable=False)
-            comment = db.Column(db.String(800))
-            user_name = db.Column(db.String(20), nullable=False)
-
-            def __repr__(self):
-                return f'participant: {self.participant}'
+        
 
         db.create_all()
 
@@ -46,6 +29,25 @@ def create_app():
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app, db = create_app()
+
+class user(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(20), nullable=False)
+    user_password = db.Column(db.String(20), nullable=False)
+    user_email = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f'User: {self.user_name}'
+
+class prak(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    participant = db.Column(db.String(20), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.String(800))
+    user_name = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f'participant: {self.participant}'
 
 Session(app)
 
